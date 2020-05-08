@@ -1,11 +1,11 @@
-Online ArUco markers generator
+Online ArUco marker sheet generator
 ====
 
-Generate markers online and save them to SVG and PDF with ease: http://chev.me/arucogen/.
+Generate multiple ArUco markers online and print or save them to PDF with ease. Forked from the excellent Online ArUco Markers Generator ([arucogen](https://github.com/okalachev/arucogen)) by [Oleg Kalachev](http://chev.me).
 
-<img src="arucogen.png" width="600px">
 
 Markers dictionaries are taken from this URL:
-https://raw.githubusercontent.com/opencv/opencv_contrib/master/modules/aruco/src/predefined_dictionaries.hpp.
+https://raw.githubusercontent.com/opencv/opencv_contrib/master/modules/aruco/src/predefined_dictionaries.hpp
 
-Learn more about ArUco markers: https://docs.opencv.org/3.2.0/d5/dae/tutorial_aruco_detection.html.
+Learn more about ArUco markers here:
+https://docs.opencv.org/4.1.0/d5/dae/tutorial_aruco_detection.html
