@@ -60,31 +60,52 @@ $(function () {
     var markerIdInputFirst = $('.setup input[name=id1]');
     var markerIdInputLast = $('.setup input[name=id2]');
     var sizeInput = $('.setup input[name=size]');
+    var xInput = $('.setup input[name=X-size]');
+    var yInput = $('.setup input[name=Y-size]');
+    var separationInput = $('.setup input[name=separation]');
 
     function updateMarkers() {
         var markerIdFirst = Number(markerIdInputFirst.val());
         var markerIdLast = Number(markerIdInputLast.val());
         var size = Number(sizeInput.val());
+        var x = Number(xInput.val());
+        var y = Number(yInput.val());
+        var separation = Number(separationInput.val());
+
         var dictName = dictSelect.val();
         var width = Number(dictSelect.find('option:selected').attr('data-width'));
         var height = Number(dictSelect.find('option:selected').attr('data-height'));
+        
 
         // Wait until dict data is loaded
         loadDict.then(function () {
             $('#cards').html('');
+            // $('#cards').style.grid-template-columns = 'repeat(3, 1fr)';
+            // $('#cards').style.grid-template-columns = 'repeat(3, 1fr)';
 
-            for (let markerId = markerIdFirst; markerId <= markerIdLast; markerId++) {
-                // Generate marker                
-                let svg = generateArucoMarker(width, height, dictName, markerId, size);
-                svg.attr({
-                    width: size + 'mm',
-                    height: size + 'mm'
-                });
-                let marker = $('<div class="card"/>').html((svg[0].outerHTML));
-                marker.append('<div class="card-text">' + markerId + '</div>');
-                $('#cards').append(marker);
+            for(let i = 0;i<y;i++){
+                for(let j = 0;j<x;j++){
+                    var markerId = markerIdFirst + i*y+j
+                    let svg = generateArucoMarker(width, height, dictName, markerId, size);
+
+                    svg.attr({
+                        width: size + 'mm',
+                        height: size + 'mm'
+                    });
+                    let marker = $('<div class="card" id="'+(i*y+j)+'"/>').html((svg[0].outerHTML));
+
+                    // marker.style.position = "absolute"
+                    // marker.style.left = j*size + "mm"
+                    // marker.style.top = i*size + "mm"
+                    $('#cards').append(marker);
+                    var box = document.getElementById((i*y+j)); // 获取元素对象
+                    console.log(box)
+                    box.style.position = "absolute"
+                    box.style.left = j*(size+separation) + 'mm'; // 设置元素左边距离为50px
+                    box.style.top = i*(size+separation) + 'mm'; // 设置元素上边距离为50px
+                }
+
             }
-
         })
     }
 

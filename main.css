@@ -68,28 +68,21 @@ a {
 }
 
 #cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    align-content: flex-start;
+   display: contents;
+   margin: 0 auto;
+   position: relative;
 }
 
 .card {
     text-align: center;
     background: white;
-    margin: 4mm 0;
+    margin: 0mm 0mm 0mm 0mm;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    border: 1px dashed #ccc;
-    width: 30%;
-}
-
-.card .card-text {
-    margin: 1em;
-    font-size: 30px;
+    /* border: 1px dashed #ccc; */
+    /* width: 30%; */
 }
 
 footer {
@@ -112,5 +105,5 @@ footer {
         display: none;
     }
     
-    #cards {display: flex}
+    #cards {display: grid}
 }
