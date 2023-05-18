@@ -1,69 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="main.js"></script>
-        <link rel="stylesheet" href="main.css"/>
-        <meta name="description" content="Generate ArUco marker sheets for printing with dictionary selection">
-        <meta name="keywords" content="ArUco, OpenCV, marker, generate, dictionary, print, computer vision, robotics">
-        <title>Online ArUco marker sheet generator</title>
-    </head>
-    <body>
-        <h1>ArUco marker sheet generator!</h1>
-        <form class="setup">
-            <div class="field">
-                <label for="frm-dict">Dictionary:</label>
-                <select name="dict" id="frm-dict">
-                    <optgroup label="Standard dictionaries">
-                        <option value="aruco" data-width="5" data-height="5">Original ArUco</option>
-                        <option selected value="4x4_1000" data-width="4" data-height="4">4x4 (50, 100, 250, 1000)</option>
-                        <option value="5x5_1000" data-width="5" data-height="5">5x5 (50, 100, 250, 1000)</option>
-                        <option value="6x6_1000" data-width="6" data-height="6">6x6 (50, 100, 250, 1000)</option>
-                        <option value="7x7_1000" data-width="7" data-height="7">7x7 (50, 100, 250, 1000)</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div class="field">
-                <label for="frm-id1">First marker ID:</label>
-                <input id="frm-id1" name="id1" type="number" min="0" max="999" value="0">
-            </div>
-            <div class="field">
-                <label for="frm-id2">Last marker ID:</label>
-                <input id="frm-id2" name="id2" type="number" min="0" max="999" value="10">
-            </div>
-            <div class="field">
-                <label for="frm-size">Marker size, mm:</label>
-                <input id="frm-size" name="size" type="number" min="10" max="100" value="100">
-            </div>
 
-            <div class="field">
-                <label for="separation-size">Marker separation, mm:</label>
-                <input id="separation" name="separation" type="number" min="10" max="100" value="5">
-            </div>
-            
-            <div class="field">
-                <label for="X-size">markers, X</label>
-                <input id="X-size" name="X-size" type="number" min="0" max="20" value="2">
-            </div>
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="main.css" />
+    <meta name="description" content="Generate ArUco marker sheets for moveit hand-eye calibration for printing with dictionary selection">
+    <meta name="keywords" content="Moveit, HandEye, calibration, target, ArUco, OpenCV, marker, generate, dictionary, print, computer vision, robotics">
+    <title>Online ArUco marker sheet generator</title>
+</head>
 
-            <div class="field">
-                <label for="Y-size">markers, Y</label>
-                <input id="Y-size" name="Y-size" type="number" min="0" max="20" value="2">
-            </div>
-
-        </form>
-
-        <div id="cards"></div>
-
-        <div class="tools">
-            You can <a href="javascript:window.print()">click here</a> to open the browser's print dialog to print or get the PDF.
+<body>
+    <h1>ArUco marker sheet generator!</h1>
+    <form class="setup">
+        <div class="field">
+            <label for="frm-dict">Dictionary:</label>
+            <select name="dict" id="frm-dict">
+                <optgroup label="Standard dictionaries">
+                    <option value="aruco" data-width="5" data-height="5">Original ArUco</option>
+                    <option selected value="4x4_1000" data-width="4" data-height="4">4x4 (50, 100, 250, 1000)</option>
+                    <option value="5x5_1000" data-width="5" data-height="5">5x5 (50, 100, 250, 1000)</option>
+                    <option value="6x6_1000" data-width="6" data-height="6">6x6 (50, 100, 250, 1000)</option>
+                    <option value="7x7_1000" data-width="7" data-height="7">7x7 (50, 100, 250, 1000)</option>
+                </optgroup>
+            </select>
         </div>
-        <footer>
-            <div>
-                See <a href="https://docs.opencv.org/4.1.0/d5/dae/tutorial_aruco_detection.html">OpenCV documentation</a> to learn about ArUco markers.<br>
-                This software is based on the excellent Online ArUco Markers Generator (<a href="https://github.com/okalachev/arucogen">arucogen</a>) by <a href="http://chev.me">Oleg Kalachev</a>.<br>
-                Sheet related functionality added by <a href="https://github.com/fodi">Fodi</a>.
-            </div>
-        </footer>
-    </body>
+        <div class="field">
+            <label for="frm-id1">First marker ID:</label>
+            <input id="frm-id1" name="id1" type="number" min="0" max="999" value="0">
+        </div>
+        <div class="field">
+            <label for="frm-id2">Last marker ID:</label>
+            <input id="frm-id2" name="id2" type="number" min="0" max="999" value="10">
+        </div>
+        <div class="field">
+            <label for="frm-size">Marker size, mm:</label>
+            <input id="frm-size" name="size" type="number" min="0" max="200" value="100">
+        </div>
+
+        <div class="field">
+            <label for="separation-size">Marker separation, mm:</label>
+            <input id="separation" name="separation" type="number" min="0" max="100" value="5">
+        </div>
+
+        <div class="field">
+            <label for="X-size">markers, X</label>
+            <input id="X-size" name="X-size" type="number" min="0" max="20" value="2">
+        </div>
+
+        <div class="field">
+            <label for="Y-size">markers, Y</label>
+            <input id="Y-size" name="Y-size" type="number" min="0" max="20" value="2">
+        </div>
+
+    </form>
+    
+    <div id="cards">
+    </div>
+    
+
+    <div class="tools">
+        You can <a href="javascript:window.print()">click here</a> to open the browser's print dialog to print or get
+        the PDF.
+    </div>
+    <footer>
+        <div>
+            See <a href="https://docs.opencv.org/4.1.0/d5/dae/tutorial_aruco_detection.html">OpenCV documentation</a> to
+            learn about ArUco markers.<br>
+            This software is based on the excellent Online ArUco Markers Generator (<a
+                href="https://github.com/okalachev/arucogen">arucogen</a>) by <a href="http://chev.me">Oleg
+                Kalachev</a>.<br>
+            Sheet related functionality added by <a href="https://github.com/fodi">Fodi</a>.
+            Hand Eye Target related functionality added by <a href="https://github.com/lingxiaomeng/">Lingxiao</a>.
+        </div>
+    </footer>
+</body>
+
 </html>

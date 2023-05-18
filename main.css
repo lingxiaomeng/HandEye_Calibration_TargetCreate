@@ -68,9 +68,11 @@ a {
 }
 
 #cards {
-   display: contents;
+   /* display: contents; */
    margin: 0 auto;
-   position: relative;
+   position:relative;
+   /* width: 1920px; */
+   height: 20cm;
 }
 
 .card {
@@ -105,5 +107,5 @@ footer {
         display: none;
     }
     
-    #cards {display: grid}
+    #cards {display: contents}
 }
